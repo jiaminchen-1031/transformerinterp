@@ -1,11 +1,26 @@
-# PyTorch Implementation of [Beyond Intuition: Rethinking Token Attributions inside Transformers]
+# Beyond Intuition: Rethinking Token Attributions inside Transformers
+
+<div align="left">
+<img src=roadmap.png width=600/>
+</div>
+
+## Abstract
+
+The multi-head attention mechanism, or rather the Transformer-based models, have always been under the spotlight, not only in the domain of text processing, but also for computer vision. Several works have recently been proposed around exploring the token attributions along the intrinsic decision process. However, the ambiguity of the expression formulation can lead to an accumulation of error, which makes the interpretation less trustworthy and less applicable to different variants. In this work, we propose a novel method to approximate token contributions inside Transformers. We start from the partial derivative to each token, divide the interpretation process into ***attention perception*** and ***reasoning feedback*** with the chain rule and explore each part individually with explicit mathematical derivations. In attention perception, we propose the head-wise and token-wise approximations in order to learn how the tokens interact to form the pooled vector. As for reasoning feedback, we adopt a noise-decreasing strategy by applying the integrated gradients to the last attention map. Our method is further validated qualitatively and quantitatively through the faithfulness evaluations across different settings: single modality (BERT and ViT) and bi-modality (CLIP), different model sizes (ViT-L) and different pooling strategies (ViT-MAE) to demonstrate the broad applicability and clear improvements over existing methods. 
+
+**The full paper can be found [here](https://openreview.net/pdf?id=rm0zIzlhcX).**
+
+<div align="left">
+<img src=example.png width=400/>
+</div>
+
 
 ## Requirements
 
 Run the following command to create the conda environment:
 
 ```
-conda env create -f environment.yml
+conda env create -f torch1.10.1.yml
 conda activate torch1.10.1
 ```
 
@@ -114,6 +129,23 @@ cd CLIP
 Run the following command for the perturbation test on ImageNet validation set:
 ```
 CUDA_VISIBLE_DEVICES=0 python CLIP/visualisation.py --image_path path-to-imagenet-val --method ours
+```
+
+## Citing
+
+If you find this project useful in your research, please consider cite:
+
+```
+@article{
+chen2022beyond,
+title={Beyond Intuition: Rethinking Token Attributions inside Transformers},
+author={Jiamin Chen and Xuhong Li and Lei Yu and Dejing Dou and Haoyi Xiong},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2022},
+url={https://openreview.net/forum?id=rm0zIzlhcX},
+note={}
+}
 ```
 
 ## Credits
