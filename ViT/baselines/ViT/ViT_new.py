@@ -308,8 +308,8 @@ class VisionTransformer(nn.Module):
         x = self.blocks[-1](x, register_hook=register_hook)
 
         if self.global_pooling:
+            x = x[:, 1:, :].mean(axis=1)
             x = self.fc_norm(x)
-            x = x[:, 1:, :].mean(axis=1) 
         elif self.dino:
             x = self.norm(x)
             x = torch.cat((x[:, 0].unsqueeze(-1), x[:, 1:, :].mean(axis=1).unsqueeze(-1)), dim=-1)
